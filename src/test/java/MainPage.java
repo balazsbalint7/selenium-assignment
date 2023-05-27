@@ -13,13 +13,14 @@ import org.openqa.selenium.NoSuchElementException;
 
 class MainPage extends PageBase {
 
-    private By footerBy = By.className("footer-block");
-    private By searchBarTogglerBy = By.xpath("//a[@class='search-bar-toggler']/i");
-    private By searchBarBy = By.name("search");
-    
-    public MainPage(WebDriver driver) {
-        super(driver);
-        this.driver.get("https://www.inf.elte.hu/en/");
+	private By footerBy = By.className("footer-block");
+	private By searchBarTogglerBy = By.xpath("//a[@class='search-bar-toggler']/i");
+	private By searchBarBy = By.name("search");
+
+    public MainPage(WebDriver driver) 
+    {
+          super(driver);
+        this.driver.get("https://stockx.com/");
     }    
     
     public String getFooterText() {
