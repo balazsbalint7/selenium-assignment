@@ -10,11 +10,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
-class PageBase
+abstract class PageBase
 {
 	protected WebDriver driver;
 	protected WebDriverWait wait;
-
 
 	public PageBase(WebDriver driver)
 	{
@@ -26,7 +25,10 @@ class PageBase
 	{
 		this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 		return this.driver.findElement(locator);
-	} 
+	}
+
+	// In the main test class, you have to run this class only
+	public abstract void runPageTests();
 
 	public String getBodyText()
 	{

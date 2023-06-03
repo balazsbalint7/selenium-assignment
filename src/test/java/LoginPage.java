@@ -11,16 +11,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
 
-class MainPage extends PageBase {
+class LoginPage extends PageBase {
 
 	private By footerBy = By.className("footer-block");
 	private By searchBarTogglerBy = By.xpath("//a[@class='search-bar-toggler']/i");
 	private By searchBarBy = By.name("search");
 
-    public MainPage(WebDriver driver) 
+    public LoginPage(WebDriver driver) 
     {
-          super(driver);
+        super(driver);
         this.driver.get("https://stockx.com/");
+    }
+
+    public void runPageTests()
+    {
+        Assert.assertTrue(true);
     }    
     
     public String getFooterText() {

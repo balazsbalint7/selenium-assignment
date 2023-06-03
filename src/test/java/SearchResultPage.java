@@ -16,5 +16,10 @@ class SearchResultPage extends PageBase {
     public SearchResultPage(WebDriver driver) {
         super(driver);
     }    
+
+    public void runPageTests()
+    {
+        Assert.assertTrue(true);
+    }
            
 }
