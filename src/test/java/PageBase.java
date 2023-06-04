@@ -47,7 +47,7 @@ abstract class PageBase
 
 	protected void setAddress(String suffix)
     {
-        this.driver.get(getBaseUrl() + suffix);
+        this.driver.get(pageUrl + suffix);
     }
 
 	public String getBodyText() // useful function for debugging

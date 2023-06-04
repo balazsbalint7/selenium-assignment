@@ -26,7 +26,7 @@ public class SeleniumMainTest
     }
     
     @Test
-    public void testLoginPage()
+    public void testLoginPage() // login, send a form, logout
 	{
         LoginPage loginPage = new LoginPage(this.driver.getDriver());
 		DefaultDataPage dataPage = new DefaultDataPage(this.driver.getDriver());
@@ -44,6 +44,40 @@ public class SeleniumMainTest
 
         loginPage.testLogged(false);
     }
+
+	@Test
+	public void testHomePage() // test a static webpage
+	{
+		HomePage homePage = new HomePage(this.driver.getDriver());
+
+		Assert.assertTrue(homePage.getTitle().contains("AQUA"));
+		String offerStr = homePage.getOfferHTML();
+
+		Assert.assertFalse(offerStr.isEmpty());
+		Assert.assertTrue(offerStr.contains("price"));
+
+		Assert.assertTrue(homePage.getBodyText().contains("100%-ban magyar tulajdon"));
+	}
+
+	@Test
+	public void testMultipleStaticPage()
+	{
+		StaticPageConfig multiplePages[] = 
+		{
+			new StaticPageConfig("jatekok/gran-turismo-sport-playstation-hits-ps4-t863687", "Gran Turismo Sport", By.xpath("//section[@class='product']//a[@data-fancybox='gallery']")),
+			new StaticPageConfig("top_eladasok.html", "Top", By.xpath("//div[@id='insideWrapper']//section[@id='top_eladasok']//h1")),
+			new StaticPageConfig("alkatreszek/cooler-master-600w-elite-v3-series-tapegyseg-mpw-6001-acabn1-eu-t607884", "Cooler Master 600W",  By.xpath("//section[@class='product_details']//div[@class='product_specifications']"))
+		};
+
+		for (StaticPageConfig conf : multiplePages)
+		{
+			StaticPage page = new StaticPage(driver.getDriver(), conf.url);
+			page.setElementBy(conf.pageElement);
+
+			Assert.assertTrue(page.getTitle().contains(conf.titleValue));
+			Assert.assertFalse(page.getHTML().isEmpty());
+		}
+	}
     
     @After
     public void close()
