@@ -12,59 +12,59 @@ import org.openqa.selenium.NoSuchElementException;
 
 class LoginPage extends PageBase 
 {
-    private final By emailInputBy = By.xpath("//form[@action='/auth/login']//input[@name='l-email']");
-    private final By pwInputBy = By.xpath("//form[@action='/auth/login']//input[@name='l-password']");
+	private final By emailInputBy = By.xpath("//form[@action='/auth/login']//input[@name='l-email']");
+	private final By pwInputBy = By.xpath("//form[@action='/auth/login']//input[@name='l-password']");
 
-    private final By logintBtnBy = By.xpath("//form[@action='/auth/login']//button[contains(text(),'Bejelentkez')]");
-    private final By logoutBtnBy = By.xpath("//div[@class='customer_portal_menu']//a[@href='/auth/logout']");
+	private final By logintBtnBy = By.xpath("//form[@action='/auth/login']//button[contains(text(),'Bejelentkez')]");
+	private final By logoutBtnBy = By.xpath("//div[@class='customer_portal_menu']//a[@href='/auth/logout']");
 
-    private final By profileBtnBy = By.xpath("//div[@class='profile']//span[@class='btn_title']");
+	private final By profileBtnBy = By.xpath("//div[@class='profile']//span[@class='btn_title']");
 
-    private final String urlSuffix = "auth/login";
+	private final String urlSuffix = "auth/login";
 
-    public LoginPage(WebDriver driver) 
-    {
-        super(driver);
-    }
+	public LoginPage(WebDriver driver) 
+	{
+		super(driver);
+	}
 
-    public void login()
-    {
-        setAddress(urlSuffix);
+	public void login()
+	{
+		setAddress(urlSuffix);
 
-        WebElement unameElement = waitAndReturnElement(emailInputBy);
-	    WebElement passwordElement = waitAndReturnElement(pwInputBy);
-        
-        unameElement.sendKeys("balazs.balint413@gmail.com");
-	    passwordElement.sendKeys("k.y!5wkDrZjfGp7");
+		WebElement unameElement = waitAndReturnElement(emailInputBy);
+		WebElement passwordElement = waitAndReturnElement(pwInputBy);
 
-        WebElement loginButton = waitAndReturnElement(logintBtnBy);
-        loginButton.click();
-    }
+		unameElement.sendKeys("balazs.balint413@gmail.com");
+		passwordElement.sendKeys("k.y!5wkDrZjfGp7");
 
-    public void logout()
-    {
-        setAddress(urlSuffix);
+		WebElement loginButton = waitAndReturnElement(logintBtnBy);
+		loginButton.click();
+	}
 
-        WebElement profileBtn = waitAndReturnElement(profileBtnBy);
-        profileBtn.click();
+	public void logout()
+	{
+		setAddress(urlSuffix);
 
-        WebElement logoutBtn = waitAndReturnElement(logoutBtnBy);
-        logoutBtn.click();
-    }
+		WebElement profileBtn = waitAndReturnElement(profileBtnBy);
+		profileBtn.click();
 
-    public void testLogged(boolean loggedIn)
-    {
-        setAddress(urlSuffix);
+		WebElement logoutBtn = waitAndReturnElement(logoutBtnBy);
+		logoutBtn.click();
+	}
 
-        WebElement profileBtn = waitAndReturnElement(profileBtnBy);
-        if (loggedIn)
-        {
-            Assert.assertEquals("Profilom", profileBtn.getText());
-        }
-        else
-        {
-            Assert.assertTrue(getTitle().contains("Bejelentkez") && getTitle().contains("regiszt"));
-            Assert.assertTrue(profileBtn.getText().contains("Bejelentkez"));
-        }
-    }
+	public void testLogged(boolean loggedIn)
+	{
+		setAddress(urlSuffix);
+
+		WebElement profileBtn = waitAndReturnElement(profileBtnBy);
+		if (loggedIn)
+		{
+			Assert.assertEquals("Profilom", profileBtn.getText());
+		}
+		else
+		{
+			Assert.assertTrue(getTitle().contains("Bejelentkez") && getTitle().contains("regiszt"));
+			Assert.assertTrue(profileBtn.getText().contains("Bejelentkez"));
+		}
+	}
 }

@@ -13,38 +13,38 @@ import org.openqa.selenium.NoSuchElementException;
 
 class DefaultDataPage extends PageBase 
 {
-    private final String areaCode = "30";
-    private final String telNum = "1234455";
+	private final String areaCode = "30";
+	private final String telNum = "1234455";
 
-    private final By areaCodeBy = By.xpath("//div[@class='adatlap-form-container']//input[@name='korzetszam']");
-    private final By telNumBy = By.xpath("//div[@class='adatlap-form-container']//input[@name='telefonszam']");
+	private final By areaCodeBy = By.xpath("//div[@class='adatlap-form-container']//input[@name='korzetszam']");
+	private final By telNumBy = By.xpath("//div[@class='adatlap-form-container']//input[@name='telefonszam']");
 
-    private final By saveDataBtnBy = By.xpath("//div[@class='adatlap-form-container']//button[contains(text(),'Alapadatok ment')]");
+	private final By saveDataBtnBy = By.xpath("//div[@class='adatlap-form-container']//button[contains(text(),'Alapadatok ment')]");
 
-    private final String urlSuffix = "/ugyfelkapu/alapadatok.html";
+	private final String urlSuffix = "/ugyfelkapu/alapadatok.html";
 
-    public DefaultDataPage(WebDriver driver)
-    {
-        super(driver);
-    }
+	public DefaultDataPage(WebDriver driver)
+	{
+		super(driver);
+	}
 
-    public void sendForm()
-    {
-        setAddress(urlSuffix);
-        
-        WebElement areaCodeInput = waitAndReturnElement(areaCodeBy);
-        WebElement telNumInput = waitAndReturnElement(telNumBy);
-        WebElement saveDataBtn = waitAndReturnElement(saveDataBtnBy);
+	public void sendForm()
+	{
+		setAddress(urlSuffix);
+		
+		WebElement areaCodeInput = waitAndReturnElement(areaCodeBy);
+		WebElement telNumInput = waitAndReturnElement(telNumBy);
+		WebElement saveDataBtn = waitAndReturnElement(saveDataBtnBy);
 
-        areaCodeInput.sendKeys(areaCode);
-        telNumInput.sendKeys(telNum);
-        saveDataBtn.click();
-    }
+		areaCodeInput.sendKeys(areaCode);
+		telNumInput.sendKeys(telNum);
+		saveDataBtn.click();
+	}
 
-    public void runTitleTest()
-    {
-        setAddress(urlSuffix);
-        
-        Assert.assertTrue(getTitle().contains("Alapadatok"));
-    }
+	public void runTitleTest()
+	{
+		setAddress(urlSuffix);
+		
+		Assert.assertTrue(getTitle().contains("Alapadatok"));
+	}
 }

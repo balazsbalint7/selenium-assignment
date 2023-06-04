@@ -42,13 +42,13 @@ abstract class PageBase
 
 	public String getTitle()
 	{
-        return this.driver.getTitle();
-    }
+		return this.driver.getTitle();
+	}
 
 	protected void setAddress(String suffix)
-    {
-        this.driver.get(pageUrl + suffix);
-    }
+	{
+		this.driver.get(pageUrl + suffix);
+	}
 
 	public String getBodyText() // useful function for debugging
 	{

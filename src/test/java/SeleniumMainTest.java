@@ -17,33 +17,33 @@ import java.net.MalformedURLException;
 
 public class SeleniumMainTest
 {
-    public CustomWebDriver driver;
-    
-    @Before
-    public void setup() throws MalformedURLException
+	public CustomWebDriver driver;
+
+	@Before
+	public void setup() throws MalformedURLException
 	{
-        driver = new CustomWebDriver();
-    }
-    
-    @Test
-    public void testLoginPage() // login, send a form, logout
+		driver = new CustomWebDriver();
+	}
+
+	@Test
+	public void testLoginPage() // login, send a form, logout
 	{
-        LoginPage loginPage = new LoginPage(this.driver.getDriver());
+		LoginPage loginPage = new LoginPage(this.driver.getDriver());
 		DefaultDataPage dataPage = new DefaultDataPage(this.driver.getDriver());
 
-        loginPage.testLogged(false);
+		loginPage.testLogged(false);
 
-        loginPage.login();
+		loginPage.login();
 
-        loginPage.testLogged(true);
+		loginPage.testLogged(true);
 
 		dataPage.runTitleTest();
 		dataPage.sendForm();
 
-        loginPage.logout();
+		loginPage.logout();
 
-        loginPage.testLogged(false);
-    }
+		loginPage.testLogged(false);
+	}
 
 	@Test
 	public void testHomePage() // test a static webpage
@@ -101,13 +101,13 @@ public class SeleniumMainTest
 		String expectedSuffix = "termekek/mikrofon-602.html";
 		Assert.assertEquals(page.getBaseUrl() + expectedSuffix, driver.getDriver().getCurrentUrl());
 	}
-    
-    @After
-    public void close()
-    {
-        if (driver != null && driver.getDriver() != null)
+
+	@After
+	public void close()
+	{
+		if (driver != null && driver.getDriver() != null)
 		{
-            driver.getDriver().quit();
-        }
-    }
+			driver.getDriver().quit();
+		}
+	}
 }
