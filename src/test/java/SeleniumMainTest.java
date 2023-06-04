@@ -17,30 +17,40 @@ import java.net.MalformedURLException;
 
 public class SeleniumMainTest
 {
-    public CustomWebDriver _driver;
+    public CustomWebDriver driver;
     
     @Before
     public void setup() throws MalformedURLException
 	{
-        _driver = new CustomWebDriver();
-        // ChromeOptions options = new ChromeOptions();
-        // driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
-        // driver.manage().window().maximize();
+        driver = new CustomWebDriver();
     }
     
     @Test
-    public void testLoginPage() {
-        LoginPage loginPage = new LoginPage(this._driver.getDriver());
+    public void testLoginPage()
+	{
+        LoginPage loginPage = new LoginPage(this.driver.getDriver());
+		DefaultDataPage dataPage = new DefaultDataPage(this.driver.getDriver());
 
-        loginPage.runPageTests();
+        loginPage.testLogged(false);
+
+        loginPage.login();
+
+        loginPage.testLogged(true);
+
+		dataPage.runTitleTest();
+        dataPage.sendForm();
+
+        loginPage.logout();
+
+        loginPage.testLogged(false);
     }
     
     @After
     public void close()
     {
-        if (_driver != null && _driver.getDriver() != null)
+        if (driver != null && driver.getDriver() != null)
 		{
-            _driver.getDriver().quit();
+            driver.getDriver().quit();
         }
     }
 }

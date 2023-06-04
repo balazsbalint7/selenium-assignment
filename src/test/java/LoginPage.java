@@ -22,34 +22,17 @@ class LoginPage extends PageBase
 
     private final By profileBtnBy = By.xpath("//div[@class='profile']//span[@class='btn_title']");
 
-    private final By areaCodeBy = By.xpath("//div[@class='adatlap-form-container']//input[@name='korzetszam']");
-    private final By telNumBy = By.xpath("//div[@class='adatlap-form-container']//input[@name='telefonszam']");
-
-    private final By saveDataBtnBy = By.xpath("//div[@class='adatlap-form-container']//button[contains(text(),'Alapadatok ment')]");
+    private final String urlSuffix = "auth/login";
 
     public LoginPage(WebDriver driver) 
     {
         super(driver);
-        this.driver.get(getBaseUrl() + "auth/login");
     }
 
-    public void runPageTests()
+    public void login()
     {
-        testLoggedOut();
+        setAddress(urlSuffix);
 
-        login();
-
-        testLoggedIn();
-
-        sendForm();
-
-        logout();
-
-        testLoggedOut();
-    }
-
-    private void login()
-    {
         WebElement unameElement = waitAndReturnElement(emailInputBy);
 	    WebElement passwordElement = waitAndReturnElement(pwInputBy);
         
@@ -60,8 +43,10 @@ class LoginPage extends PageBase
         loginButton.click();
     }
 
-    private void logout()
+    public void logout()
     {
+        setAddress(urlSuffix);
+
         WebElement profileBtn = waitAndReturnElement(profileBtnBy);
         profileBtn.click();
 
@@ -69,31 +54,19 @@ class LoginPage extends PageBase
         logoutBtn.click();
     }
 
-    private void sendForm()
+    public void testLogged(boolean loggedIn)
     {
-        String areaCode = "30";
-        String telNum = "1234455";
+        setAddress(urlSuffix);
 
-        this.driver.get(getBaseUrl() + "/ugyfelkapu/alapadatok.html");
-
-        WebElement areaCodeInput = waitAndReturnElement(areaCodeBy);
-        WebElement telNumInput = waitAndReturnElement(telNumBy);
-        WebElement saveDataBtn = waitAndReturnElement(saveDataBtnBy);
-
-        areaCodeInput.sendKeys(areaCode);
-        telNumInput.sendKeys(telNum);
-        saveDataBtn.click();
-    }
-
-    private void testLoggedOut()
-    {
         WebElement profileBtn = waitAndReturnElement(profileBtnBy);
-        Assert.assertTrue(profileBtn.getText().contains("Bejelentkez"));
-    }
-
-    private void testLoggedIn()
-    {
-        WebElement profileBtn = waitAndReturnElement(profileBtnBy);
-        Assert.assertTrue(profileBtn.getText().contains("Profilom"));
+        if (loggedIn)
+        {
+            Assert.assertEquals("Profilom", profileBtn.getText());
+        }
+        else
+        {
+            Assert.assertTrue(getTitle().contains("Bejelentkez") && getTitle().contains("regiszt"));
+            Assert.assertTrue(profileBtn.getText().contains("Bejelentkez"));
+        }
     }
 }

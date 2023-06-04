@@ -11,34 +11,34 @@ import java.net.MalformedURLException;
 
 public class CustomWebDriver 
 {
-    public ChromeOptions _options;
-    public URL _url;
+    public ChromeOptions options;
+    public URL url;
 
-    public WebDriver _driver;
+    public WebDriver driver;
 
     public CustomWebDriver() throws MalformedURLException
 	{
-		_options = new ChromeOptions();
-        _url = new URL("http://selenium:4444/wd/hub");
+		options = new ChromeOptions();
+        url = new URL("http://selenium:4444/wd/hub");
         
         // custom options
-        _options.addArguments("--start-maximized");
-        _options.addArguments("--ignore-certificate-errors");
-        _options.addArguments("--disable-popup-blocking");
-        _options.addArguments("--no-sandbox");  
-        _options.addArguments("--disable-dev-shm-usage");  
-        
+        options.addArguments("--start-maximized");
+        options.addArguments("--ignore-certificate-errors");
+        options.addArguments("--disable-popup-blocking");
+        options.addArguments("--no-sandbox");  
+        options.addArguments("--disable-dev-shm-usage");  
+
         // performance logging
         LoggingPreferences loggingPrefs = new LoggingPreferences();
         loggingPrefs.enable(LogType.PERFORMANCE, Level.INFO);
-        _options.setCapability(CapabilityType.LOGGING_PREFS, loggingPrefs);
+        options.setCapability(CapabilityType.LOGGING_PREFS, loggingPrefs);
 
-        _driver = new RemoteWebDriver(_url, _options);
-        _driver.manage().window().maximize();
+        driver = new RemoteWebDriver(url, options);
+        driver.manage().window().maximize();
 	}
 
     public WebDriver getDriver()
     {
-        return _driver;
+        return driver;
     }
 }

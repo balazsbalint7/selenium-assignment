@@ -19,7 +19,9 @@ abstract class PageBase
 	protected WebDriver driver;
 	protected WebDriverWait wait;
 
-	protected String _pageUrl = "https://aqua.hu/";
+	protected String pageUrl = "https://aqua.hu/";
+
+	protected By titleBy = By.xpath("//title");
 
 	public PageBase(WebDriver driver)
 	{
@@ -33,15 +35,22 @@ abstract class PageBase
 		return this.driver.findElement(locator);
 	}
 
-	// In the main test class, you have to run this class only
-	public abstract void runPageTests();
-
 	public String getBaseUrl()
 	{
-		return _pageUrl;
+		return pageUrl;
 	}
 
-	public String getBodyText()
+	public String getTitle()
+	{
+        return this.driver.getTitle();
+    }
+
+	protected void setAddress(String suffix)
+    {
+        this.driver.get(getBaseUrl() + suffix);
+    }
+
+	public String getBodyText() // useful function for debugging
 	{
 		WebElement bodyElement = this.waitAndReturnElement(By.tagName("body"));
 		return bodyElement.getText();
