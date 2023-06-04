@@ -38,7 +38,7 @@ public class SeleniumMainTest
         loginPage.testLogged(true);
 
 		dataPage.runTitleTest();
-        dataPage.sendForm();
+		dataPage.sendForm();
 
         loginPage.logout();
 
@@ -71,7 +71,7 @@ public class SeleniumMainTest
 
 		for (StaticPageConfig conf : multiplePages)
 		{
-			StaticPage page = new StaticPage(driver.getDriver(), conf.url);
+			StaticPage page = new StaticPage(this.driver.getDriver(), conf.url);
 			page.setElementBy(conf.pageElement);
 
 			Assert.assertTrue(page.getTitle().contains(conf.titleValue));
@@ -82,13 +82,24 @@ public class SeleniumMainTest
 	@Test
 	public void testSearch() // filling a textarea
 	{
-		SearchPage page = new SearchPage(driver.getDriver());
+		SearchPage page = new SearchPage(this.driver.getDriver());
 
 		Assert.assertTrue(page.getTitle().contains("-"));
 
 		String input = "intelCorei7";
 		String result = page.searchForInput("intelCorei7");
 		Assert.assertTrue(result.contains(input));
+	}
+
+	@Test
+	public void testHover() // test hover
+	{
+		HomePage page = new HomePage(this.driver.getDriver());
+
+		page.performHovers();
+
+		String expectedSuffix = "termekek/mikrofon-602.html";
+		Assert.assertEquals(page.getBaseUrl() + expectedSuffix, driver.getDriver().getCurrentUrl());
 	}
     
     @After

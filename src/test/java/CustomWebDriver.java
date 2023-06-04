@@ -25,6 +25,8 @@ public class CustomWebDriver
         options.addArguments("--start-maximized");
         options.addArguments("--ignore-certificate-errors");
         options.addArguments("--disable-popup-blocking");
+
+        // it was added to solve chrome errors
         options.addArguments("--no-sandbox");  
         options.addArguments("--disable-dev-shm-usage");  
 
