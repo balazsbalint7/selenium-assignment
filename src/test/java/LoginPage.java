@@ -10,8 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
-import java.util.concurrent.TimeUnit;
-
 class LoginPage extends PageBase 
 {
     private final By emailInputBy = By.xpath("//form[@action='/auth/login']//input[@name='l-email']");

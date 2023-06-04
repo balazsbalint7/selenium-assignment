@@ -78,6 +78,18 @@ public class SeleniumMainTest
 			Assert.assertFalse(page.getHTML().isEmpty());
 		}
 	}
+
+	@Test
+	public void testSearch() // filling a textarea
+	{
+		SearchPage page = new SearchPage(driver.getDriver());
+
+		Assert.assertTrue(page.getTitle().contains("-"));
+
+		String input = "intelCorei7";
+		String result = page.searchForInput("intelCorei7");
+		Assert.assertTrue(result.contains(input));
+	}
     
     @After
     public void close()
