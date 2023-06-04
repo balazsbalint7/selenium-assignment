@@ -10,10 +10,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 
+
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+
 abstract class PageBase
 {
 	protected WebDriver driver;
 	protected WebDriverWait wait;
+
+	protected String _pageUrl = "https://aqua.hu/";
 
 	public PageBase(WebDriver driver)
 	{
@@ -29,6 +35,11 @@ abstract class PageBase
 
 	// In the main test class, you have to run this class only
 	public abstract void runPageTests();
+
+	public String getBaseUrl()
+	{
+		return _pageUrl;
+	}
 
 	public String getBodyText()
 	{

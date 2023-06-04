@@ -33,25 +33,7 @@ public class SeleniumMainTest
         LoginPage loginPage = new LoginPage(this._driver.getDriver());
 
         loginPage.runPageTests();
-        // Assert.assertTrue(mainPage.getFooterText().contains("2021 ELTE Faculty of Informatics"));
-
-        // SearchResultPage searchResultPage = mainPage.search("Students");
-        // String bodyText = searchResultPage.getBodyText();
-        // System.out.println(bodyText);
-        // Assert.assertTrue(bodyText.contains("FOUND"));
-        // Assert.assertTrue(bodyText.contains("Current Students"));
     }
-    
-    // @Test
-    // public void testSearch2() {
-    //     String[] searchQueries={"something","","xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"};  
-    //     for(String searchQuery : searchQueries) {  
-    //         MainPage mainPage = new MainPage(this.driver);
-    //         SearchResultPage searchResultPage = mainPage.search(searchQuery);
-    //         String bodyText = searchResultPage.getBodyText();
-    //         Assert.assertTrue(bodyText.contains("FOUND"));
-    //     }  
-    // }
     
     @After
     public void close()
